@@ -15,5 +15,3 @@ def show():
 	html=html+"</table>"
 	print(html)
 	return html
-
-show()
