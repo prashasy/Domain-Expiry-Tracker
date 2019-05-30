@@ -51,7 +51,7 @@ def get_data(url):
 	ed=w.expiration_date
 	e=""
 	try:
-		e=ed.strftime("%a,%d %B,%Y")
+		e=ed.strftime("%Y-%m-%d %H:%M:%S")
 	except:
 		try:
 			for each in ed:
@@ -60,10 +60,10 @@ def get_data(url):
 		except:
 			e=str(ed)
 
-	tte=datetime.datetime.strptime(e,"%a,%d %B,%Y")-datetime.datetime.now()
+	tte=datetime.datetime.strptime(e,"%Y-%m-%d %H:%M:%S")-datetime.datetime.now()
 	return [e,tte.days]
 
-
+# %a,%d %B,%Y
 
 
 
