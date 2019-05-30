@@ -4,14 +4,29 @@ import datetime
 import sqlite3 as sql
 
 
+def transact_db(url,e,tte):
+	conn=sql.connect("domain_data.db")
+	cur=conn.cursor()
+	cur.execute("insert into domains(domain,expiry,tte)values(?,?,?)",(str(url),str(e),str(tte)))
+	print("data inserted")
+	conn.commit()
+	conn.close()
+
 def insert_url(url):
 	conn=sql.connect("domain_data.db")
 	cur=conn.cursor()
 	res=get_data(url)
 	e=res[0]
 	tte=res[1]
-	cur.execute("insert into domains(domain,expiry,tte)values(?,?,?)",(str(url),str(e),str(tte)))
-
+	res=cur.execute("select 1 from domains where domain=?",(url,))
+	op=res.fetchall()
+	try:
+		if(op[0][0]==1):
+			print("entry exists...updating")
+			update(url)
+	except:
+		cur.execute("insert into domains(domain,expiry,tte)values(?,?,?)",(str(url),str(e),str(tte)))
+		print("data inserted")
 	conn.commit()
 	conn.close()
 
@@ -50,7 +65,7 @@ def get_data(url):
 			e=str(ed)
 
 	tte=datetime.datetime.strptime(e,"%a,%d %B,%Y")-datetime.datetime.now()
-	return [e,tte]
+	return [e,tte.days]
 
 
 insert_url("cybervie.com")
