@@ -69,7 +69,6 @@ def get_data(url):
 
 
 def insert_url(url):
-	url=input("Enter url")
 	conn=sql.connect("domain_data.db")
 	cur=conn.cursor()
 	res=get_data(url)
