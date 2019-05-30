@@ -6,10 +6,11 @@ def create():
 	
 	print("Database created successfully")
 	cur=con.cursor()
-	cur.execute("create table domains (id integer primary key auto increment,domain text,expiry text,tte int)")
+	cur.execute("create table domains(id integer primary key autoincrement,domain text,expiry text,tte int)")
 	print("Table domains created successfully!!")
 
 	con.commit()
 	con.close()
 
-sql_connect()
+
+create()

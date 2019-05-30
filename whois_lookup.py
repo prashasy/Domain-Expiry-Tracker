@@ -1,15 +1,24 @@
 import whois
-import socket
 import requests
+import datetime
+import sqlite3 as sql
 
 
-def insert_url:
+def insert_url(url):
+	conn=sql.connect("domain_data.db")
+	cur=conn.cursor()
+	res=get_data(url)
+	e=res[0]
+	tte=res[1]
+	cur.execute("insert into domains(domain,expiry,tte)values(?,?,?)",(str(url),str(e),str(tte)))
+
+	conn.commit()
+	conn.close()
 
 
 
 
-
-def whois_lookup(url):
+def get_data(url):
 	url2=url
 	p2=url[:3]
 	if(url[:4]!="http" and p2!="www"):
@@ -40,7 +49,10 @@ def whois_lookup(url):
 		except:
 			e=str(ed)
 
-	a={"Domain Expiry":e}
-	return a
+	tte=datetime.datetime.strptime(e,"%a,%d %B,%Y")-datetime.datetime.now()
+	return [e,tte]
+
+
+insert_url("cybervie.com")
 
 
