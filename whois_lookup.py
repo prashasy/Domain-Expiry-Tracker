@@ -3,6 +3,11 @@ import socket
 import requests
 
 
+def insert_url:
+
+
+
+
 
 def whois_lookup(url):
 	url2=url
