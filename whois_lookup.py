@@ -5,7 +5,24 @@ import requests
 
 
 def whois_lookup(url):
-	w=whois.whois(url)
+	url2=url
+	p2=url[:3]
+	if(url[:4]!="http" and p2!="www"):
+		url="http://www."+url
+	else:
+		if(p2=="www"):
+			url="http://"+url
+
+
+	if(url[:5]=="https"):
+		url2=url[8:]
+	else:
+		url2=url[7:]
+
+	print("URl:"+url)
+	print("URL2:"+url2)
+
+	w=whois.whois(url2)
 	ed=w.expiration_date
 	e=""
 	try:
