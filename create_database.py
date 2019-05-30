@@ -11,6 +11,3 @@ def create():
 
 	con.commit()
 	con.close()
-
-
-create()
