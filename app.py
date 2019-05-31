@@ -21,8 +21,9 @@ def add():
     url=request.form['url']
     main.insert_url(url)
     res=display.show()
-    print(res)
     return render_template("index.html",details=res)
+
+
 
 @app.route("/create_database")
 def create():
