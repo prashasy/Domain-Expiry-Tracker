@@ -25,10 +25,6 @@ def transact_db(url,e,tte):
 	conn.close()
 
 
-
-
-
-
 def get_data(url):
 	url2=url
 	p2=url[:3]
