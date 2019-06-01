@@ -32,6 +32,8 @@ tr:nth-child(even) {
 
 
 
+
+
 </head>
 
 <body>
@@ -49,7 +51,7 @@ tr:nth-child(even) {
 
 
 
-<center><a href="/view"><button>View Database</button></a></center>
+<center><a><button type="button" class="btn btn-info" id="view_btn">View Database</button></a></center>
 
 
 <div id="display" align="center">
@@ -57,6 +59,55 @@ tr:nth-child(even) {
 {{details | safe}}
 
 </div>
+
+
+
+
+<script type="text/javascript">
+
+var btn=document.getElementById("view_btn");
+btn.addEventListener("click",function(){
+
+          $.getJSON('/view_database', {}, function(data) {
+          document.getElementById("display").innerHTML=data;
+        });
+
+
+});
+
+</script>
+
+
+
+
+<script>
+// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+// var btn=document.getElementById("view_btn");
+// btn.addEventListener("click",function(){
+//   var req=new XMLHTTPRequest();
+//   req.open("GET","/view_database");
+//   req.onload=function(){
+//     var data=JSON.parse(req.response.Text);
+//     renderHTML(data);
+//   };
+//   req.send();
+// });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
