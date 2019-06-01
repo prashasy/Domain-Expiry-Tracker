@@ -1,10 +1,9 @@
 from flask import Flask
-from flask import Flask, flash, redirect, render_template, request, session, abort,send_file,url_for
+from flask import Flask, flash, redirect, render_template, request, session, abort,send_file,url_for,jsonify
 import os
 import main
 import create_database
 import display
-
 
 app = Flask(__name__)
  
@@ -24,6 +23,10 @@ def add():
     return render_template("index.html",details=res)
 
 
+@app.route("/view_database",methods=["GET"])
+def view():
+    res=display.show()
+    return jsonify(res)
 
 @app.route("/create_database")
 def create():
