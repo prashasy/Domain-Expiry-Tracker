@@ -43,8 +43,12 @@ def get_data(url):
 	print("URl:"+url)
 	print("URL2:"+url2)
 
-	w=whois.whois(url2)
-	ed=w.expiration_date
+	try:
+		w=whois.whois(url2)
+		ed=w.expiration_date
+	except:
+		return ["N/A","N/A"]
+
 	e=""
 	try:
 		e=ed.strftime("%Y-%m-%d %H:%M:%S")
@@ -56,8 +60,17 @@ def get_data(url):
 		except:
 			e=str(ed)
 
-	tte=datetime.datetime.strptime(e,"%Y-%m-%d %H:%M:%S")-datetime.datetime.now()
-	return [e,tte.days]
+	try:
+		tte=datetime.datetime.strptime(e,"%Y-%m-%d %H:%M:%S")-datetime.datetime.now()
+	except:
+		tte=-9999
+	ret=[]
+	try:
+		ret=[e,tte.days]
+	except:
+		ret=[e,tte]
+
+	return ret
 
 # %a,%d %B,%Y
 
