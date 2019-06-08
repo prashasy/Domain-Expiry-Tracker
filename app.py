@@ -15,13 +15,13 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/", methods=['POST'])
+@app.route("/submit_domain",methods=["GET"])
 def add():
+    print("here")
     url=request.form['url']
     main.insert_url(url)
     res=display.show()
-    return render_template("index.html",details=res)
-
+    return jsonify({'status':"ok"})
 
 @app.route("/view_database",methods=["GET"])
 def view():
