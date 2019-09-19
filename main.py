@@ -25,6 +25,14 @@ def transact_db(url,e,tte):
 	conn.close()
 
 
+
+def get_tte(d):
+	try:
+		tte=datetime.datetime.strptime(d,"%Y-%m-%d %H:%M:%S")-datetime.datetime.now()
+	except:
+		return -9999
+	return tte.days
+
 def get_data(url):
 	url2=url
 	p2=url[:3]
@@ -60,19 +68,11 @@ def get_data(url):
 		except:
 			e=str(ed)
 
-	try:
-		tte=datetime.datetime.strptime(e,"%Y-%m-%d %H:%M:%S")-datetime.datetime.now()
-	except:
-		tte=-9999
 	ret=[]
-	try:
-		ret=[e,tte.days]
-	except:
-		ret=[e,tte]
+	ret=[e,datetime.datetime.now()]
 
 	return ret
 
-# %a,%d %B,%Y
 
 
 

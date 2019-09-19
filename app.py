@@ -17,8 +17,11 @@ def home():
 
 @app.route("/submit_domain",methods=["GET"])
 def add():
-    print("here")
-    url=request.form['url']
+    url = request.args.get('url','', type=str)
+    if(url==''):
+
+        return "Please enter the target"
+
     main.insert_url(url)
     res=display.show()
     return jsonify({'status':"ok"})
@@ -36,4 +39,4 @@ def create():
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
-    app.run(app.run(debug=True, port=os.getenv("PORT")))
+    app.run(debug=True, port=os.getenv("PORT"))
